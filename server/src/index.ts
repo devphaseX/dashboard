@@ -1,8 +1,8 @@
-import express from 'express';
-import morgan from 'morgan';
-import helmet from 'helmet';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+import { createConfig, createServerApp } from './server';
+import { getEnvVariable } from './server/config/env';
 
-/* Configuration */
-const app = express();
+(async () => {
+  const env = getEnvVariable();
+  const config = await createConfig({ env });
+  const app = createServerApp({ env });
+})();
