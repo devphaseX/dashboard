@@ -7,6 +7,8 @@ dotenv.config({
 
 interface AppEnvironmentVariable {
   NODE_ENV: 'development' | 'production';
+  PORT: number | string;
+  DB_URL: string;
 }
 
 const getEnvVariable = (): AppEnvironmentVariable => ({
