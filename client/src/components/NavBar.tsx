@@ -16,11 +16,14 @@ import {
   useTheme,
   InputBase,
 } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import { FlexBetween } from './FlexBetween';
 import type { ThemeStyle } from '../theme';
+import { setMode } from '../store/state/global';
 
 const NavBar = () => {
   const theme = useTheme<ThemeStyle>();
+  const dispatch = useDispatch();
   return (
     <AppBar sx={{ position: 'static', background: 'none', boxShadow: 'none' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
@@ -41,6 +44,18 @@ const NavBar = () => {
               <Search />
             </IconButton>
           </FlexBetween>
+        </FlexBetween>
+        <FlexBetween sx={{ gap: '1.5rem' }}>
+          <IconButton onClick={() => dispatch(setMode())}>
+            {theme.palette.mode == 'dark' ? (
+              <LightModeOutlined sx={{ fontSize: '25px' }} />
+            ) : (
+              <DarkModeOutlined sx={{ fontSize: '25px' }} />
+            )}
+          </IconButton>
+          <IconButton>
+            <SettingsOutlined sx={{ fontSize: '25px' }} />
+          </IconButton>
         </FlexBetween>
       </Toolbar>
     </AppBar>

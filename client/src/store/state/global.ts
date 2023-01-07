@@ -6,7 +6,7 @@ interface GlobalSharedState {
   themeMode: ThemeMode;
 }
 
-const getInitialState = (): GlobalSharedState => ({ themeMode: 'light' });
+const getInitialState = (): GlobalSharedState => ({ themeMode: 'dark' });
 
 const sharedState = createSlice({
   name: 'global',

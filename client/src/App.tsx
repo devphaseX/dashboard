@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { CssBaseline } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
 import {
   createBrowserRouter,
   Navigate,
@@ -28,7 +28,7 @@ const App = () => {
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
   return (
-    <div>
+    <div className="app">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <RouterProvider router={router} />
