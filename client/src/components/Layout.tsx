@@ -7,7 +7,7 @@ import { Sidebar } from './Sidebar';
 
 interface SideBarMenuBase {
   sideBarOpen: boolean;
-  setSideBarMode: (mode: boolean) => void;
+  setSideBarMode: (mode: boolean | ((currentMode: boolean) => boolean)) => void;
 }
 
 interface ResolutionMode {
