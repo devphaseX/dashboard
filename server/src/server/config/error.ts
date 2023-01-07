@@ -1,21 +1,22 @@
+import { getExternalSettlePromise } from '../../util';
 import { UnhandledException, UnhandledRejection } from '../../util/error';
 
-function handleServerError(
-  rej: (error: UnhandledException | UnhandledRejection) => void
-) {
+function handleServerError() {
+  const { promise, reject } = getExternalSettlePromise();
   process.addListener('uncaughtException', (error) =>
-    rej(
+    reject(
       new UnhandledException(`Caught an exception which is'nt handled.`, error)
     )
   );
   process.addListener('unhandledRejection', (error) =>
-    rej(
+    reject(
       new UnhandledRejection(
         'Caught a promise whose error case is properly handled',
         error
       )
     )
   );
+  return promise;
 }
 
 export { handleServerError };

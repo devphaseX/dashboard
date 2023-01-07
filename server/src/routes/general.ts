@@ -3,5 +3,5 @@ import { RoutePath } from '.';
 
 const route = express.Router();
 
-const routePath = { path: 'general', app: route } satisfies RoutePath;
+const routePath = { path: 'general', app: route } as const satisfies RoutePath;
 export { routePath };

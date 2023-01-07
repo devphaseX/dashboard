@@ -1,13 +1,18 @@
+import { Mongoose } from 'mongoose';
+import { startDbServer } from './database/mongodb';
 import { AppEnvironmentVariable } from './env';
 
 interface ConfigOption {
   env: AppEnvironmentVariable;
 }
 
-interface ConfigResult {}
+interface ConfigResult {
+  db: Mongoose;
+}
 
 async function createConfig(_option: ConfigOption): Promise<ConfigResult> {
-  return {};
+  const db = await startDbServer();
+  return { db };
 }
 
 export { createConfig };

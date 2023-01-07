@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import { getEnvVariable } from '../env';
-
 const { DB_URL } = getEnvVariable();
 
 function startDbServer() {

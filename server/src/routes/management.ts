@@ -3,5 +3,8 @@ import { RoutePath } from '.';
 
 const route = express.Router();
 
-const routePath = { path: 'management', app: route } satisfies RoutePath;
+const routePath = {
+  path: 'management',
+  app: route,
+} as const satisfies RoutePath;
 export { routePath };
