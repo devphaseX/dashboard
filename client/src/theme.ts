@@ -1,3 +1,5 @@
+import { Theme } from '@mui/material';
+
 // color design tokens export
 export const tokensDark = {
   grey: {
@@ -135,3 +137,7 @@ export const themeSettings = (mode: 'light' | 'dark') => {
     },
   };
 };
+
+type ThemeStyle = ReturnType<typeof themeSettings> & Theme;
+
+export type { ThemeStyle };

@@ -6,9 +6,11 @@ interface GlobalSharedState {
   themeMode: ThemeMode;
 }
 
+const getInitialState = (): GlobalSharedState => ({ themeMode: 'light' });
+
 const sharedState = createSlice({
   name: 'global',
-  initialState: { themeMode: 'light' } as GlobalSharedState,
+  initialState: getInitialState(),
   reducers: {
     setMode(state) {
       state.themeMode = state.themeMode === 'light' ? 'dark' : 'light';
@@ -18,5 +20,9 @@ const sharedState = createSlice({
 
 export type { GlobalSharedState };
 
-export const { actions, reducer } = sharedState;
+export const {
+  actions: { setMode },
+  reducer: globalStateReducer,
+} = sharedState;
+
 export default sharedState;
