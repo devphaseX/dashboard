@@ -11,7 +11,6 @@ import React from 'react';
 import {
   AppBar,
   IconButton,
-  Menu,
   Toolbar,
   useTheme,
   InputBase,
@@ -20,8 +19,11 @@ import { useDispatch } from 'react-redux';
 import { FlexBetween } from './FlexBetween';
 import type { ThemeStyle } from '../theme';
 import { setMode } from '../store/state/global';
+import type { SideBarMenuBase } from './Layout';
 
-const NavBar = () => {
+interface NavBarProps extends SideBarMenuBase {}
+
+const NavBar = ({}: NavBarProps) => {
   const theme = useTheme<ThemeStyle>();
   const dispatch = useDispatch();
   return (

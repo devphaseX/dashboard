@@ -2,12 +2,36 @@ import { Outlet } from 'react-router-dom';
 import { Box, useMediaQuery } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { NavBar } from './NavBar';
+import { useState } from 'react';
+import { Sidebar } from './Sidebar';
+
+interface SideBarMenuBase {
+  sideBarOpen: boolean;
+  setSideBarMode: (mode: boolean) => void;
+}
+
+interface ResolutionMode {
+  isMobileMode: boolean;
+}
 
 const Layout = () => {
+  const isNonMobileDevice = useMediaQuery('(min-width: 600px)');
+  const [menuOpen, setMenuMode] = useState(true);
+
   return (
-    <Box width="100vw" height="100vh">
+    <Box
+      display={isNonMobileDevice ? 'flex' : 'block'}
+      width="100vw"
+      height="100vh"
+    >
+      <Sidebar
+        isMobileMode={!isNonMobileDevice}
+        sideBarOpen={menuOpen}
+        setSideBarMode={setMenuMode}
+        drawerWidth="250px"
+      />
       <Box>
-        <NavBar />
+        <NavBar sideBarOpen={menuOpen} setSideBarMode={setMenuMode} />
         <Outlet />
       </Box>
     </Box>
@@ -15,3 +39,5 @@ const Layout = () => {
 };
 
 export { Layout };
+
+export type { SideBarMenuBase, ResolutionMode };
