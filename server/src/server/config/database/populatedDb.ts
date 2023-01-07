@@ -3,13 +3,13 @@ import { startDbServer } from './mongodb';
 import { User } from '../../../model/User';
 import mongoose from 'mongoose';
 
-type ModelData<M> = M extends mongoose.Model<infer DataSchema>
-  ? { [Propert in keyof DataSchema]: any }
+type ModelData<DataModel> = DataModel extends mongoose.Model<infer DataSchema>
+  ? { [Propert in keyof DataSchema]?: any }
   : never;
 
 async function populateDb<Model extends mongoose.Model<any>>(
   Model: Model,
-  data: Array<Partial<ModelData<Model>>>
+  data: Array<ModelData<Model>>
 ) {
   await Model.deleteMany();
   await Model.insertMany(data);
