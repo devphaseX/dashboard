@@ -30,7 +30,7 @@ const Layout = () => {
         setSideBarMode={setMenuMode}
         drawerWidth="250px"
       />
-      <Box>
+      <Box flexGrow={1}>
         <NavBar sideBarOpen={menuOpen} setSideBarMode={setMenuMode} />
         <Outlet />
       </Box>
