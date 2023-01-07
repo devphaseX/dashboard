@@ -23,14 +23,14 @@ import type { SideBarMenuBase } from './Layout';
 
 interface NavBarProps extends SideBarMenuBase {}
 
-const NavBar = ({}: NavBarProps) => {
+const NavBar = ({ setSideBarMode }: NavBarProps) => {
   const theme = useTheme<ThemeStyle>();
   const dispatch = useDispatch();
   return (
     <AppBar sx={{ position: 'static', background: 'none', boxShadow: 'none' }}>
       <Toolbar sx={{ justifyContent: 'space-between' }}>
         <FlexBetween>
-          <IconButton onClick={() => console.log('open/close menu')}>
+          <IconButton onClick={() => setSideBarMode(true)}>
             <MenuIcon />
           </IconButton>
           <FlexBetween

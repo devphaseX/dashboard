@@ -4,9 +4,13 @@ type ThemeMode = 'dark' | 'light';
 
 interface GlobalSharedState {
   themeMode: ThemeMode;
+  user?: string | null;
 }
 
-const getInitialState = (): GlobalSharedState => ({ themeMode: 'dark' });
+const getInitialState = (): GlobalSharedState => ({
+  themeMode: 'dark',
+  user: '63701cc1f03239b7f700000e',
+});
 
 const sharedState = createSlice({
   name: 'global',

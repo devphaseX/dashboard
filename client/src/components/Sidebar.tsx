@@ -68,87 +68,91 @@ const Sidebar = ({
   const theme = useTheme<ThemeStyle>();
   return (
     <Box component="nav">
-      <Drawer
-        open={sideBarOpen}
-        onClose={() => setSideBarMode(false)}
-        variant="persistent"
-        anchor="left"
-        sx={{
-          width:
-            typeof drawerWidth === 'number' ? `${drawerWidth}px` : drawerWidth,
-          '& .MuiDrawer-paper': {
-            color: theme.palette.secondary[400],
-            background: theme.palette.background.alt,
-            borderWidth: isMobileMode ? '0' : '2px',
-          },
-        }}
-      >
-        <Box width="100%">
-          <Box m="1.5rem 2rem 2rem 3rem">
-            <FlexBetween>
-              <Box display="flex" alignItems="center" gap="0.5rem">
-                <Typography variant="h4" fontWeight="bold">
-                  ECOMVISIONS
-                </Typography>
-              </Box>
-              {!isMobileMode ? (
-                <IconButton onClick={() => setSideBarMode((mode) => !mode)}>
-                  <ChevronLeft />
-                </IconButton>
-              ) : null}
-            </FlexBetween>
-          </Box>
-          <List>
-            {navItems.map(({ text, icon }) => {
-              if (!icon) {
-                return (
-                  <Typography key={text} sx={{ m: '2.25rem 0 1rem 3rem' }}>
-                    {text}
+      {sideBarOpen && (
+        <Drawer
+          open={sideBarOpen}
+          onClose={() => setSideBarMode(false)}
+          variant="persistent"
+          anchor="left"
+          sx={{
+            width:
+              typeof drawerWidth === 'number'
+                ? `${drawerWidth}px`
+                : drawerWidth,
+            '& .MuiDrawer-paper': {
+              color: theme.palette.secondary[400],
+              background: theme.palette.background.alt,
+              borderWidth: isMobileMode ? '0' : '2px',
+            },
+          }}
+        >
+          <Box width="100%">
+            <Box m="1.5rem 2rem 2rem 3rem">
+              <FlexBetween>
+                <Box display="flex" alignItems="center" gap="0.5rem">
+                  <Typography variant="h4" fontWeight="bold">
+                    ECOMVISIONS
                   </Typography>
-                );
-              }
+                </Box>
+                {!isMobileMode ? (
+                  <IconButton onClick={() => setSideBarMode((mode) => !mode)}>
+                    <ChevronLeft />
+                  </IconButton>
+                ) : null}
+              </FlexBetween>
+            </Box>
+            <List>
+              {navItems.map(({ text, icon }) => {
+                if (!icon) {
+                  return (
+                    <Typography key={text} sx={{ m: '2.25rem 0 1rem 3rem' }}>
+                      {text}
+                    </Typography>
+                  );
+                }
 
-              const lowerCaseText = text.toLowerCase();
-              const isActiveRoute = pathMatch(pathname, lowerCaseText);
+                const lowerCaseText = text.toLowerCase();
+                const isActiveRoute = pathMatch(pathname, lowerCaseText);
 
-              return (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton
-                    onClick={() => {
-                      navigate(`/${lowerCaseText}`);
-                    }}
-                    sx={{
-                      backgroundColor: isActiveRoute
-                        ? theme.palette.secondary[300]
-                        : 'transparent',
-
-                      color: isActiveRoute
-                        ? theme.palette.primary[600]
-                        : theme.palette.secondary[100],
-                    }}
-                  >
-                    <ListItemIcon
+                return (
+                  <ListItem key={text} disablePadding>
+                    <ListItemButton
+                      onClick={() => {
+                        navigate(`/${lowerCaseText}`);
+                      }}
                       sx={{
-                        ml: '2rem',
+                        backgroundColor: isActiveRoute
+                          ? theme.palette.secondary[300]
+                          : 'transparent',
+
                         color: isActiveRoute
                           ? theme.palette.primary[600]
-                          : theme.palette.secondary[200],
+                          : theme.palette.secondary[100],
                       }}
                     >
-                      {icon}
-                    </ListItemIcon>
-                    <ListItemText primary={text}>
-                      {isActiveRoute && (
-                        <ChevronRightOutlined sx={{ ml: 'auto' }} />
-                      )}
-                    </ListItemText>
-                  </ListItemButton>
-                </ListItem>
-              );
-            })}
-          </List>
-        </Box>
-      </Drawer>
+                      <ListItemIcon
+                        sx={{
+                          ml: '2rem',
+                          color: isActiveRoute
+                            ? theme.palette.primary[600]
+                            : theme.palette.secondary[200],
+                        }}
+                      >
+                        {icon}
+                      </ListItemIcon>
+                      <ListItemText primary={text}>
+                        {isActiveRoute && (
+                          <ChevronRightOutlined sx={{ ml: 'auto' }} />
+                        )}
+                      </ListItemText>
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Box>
+        </Drawer>
+      )}
     </Box>
   );
 };
