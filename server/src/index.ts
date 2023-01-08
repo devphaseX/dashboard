@@ -7,7 +7,7 @@ import { handleServerError } from './server/config/error';
   const { db } = await createConfig({ env });
   const app = createServerApp({ env });
 
-  const PORT = +(env.PORT ?? 5500);
+  const PORT = +(env.PORT ?? 5003);
 
   try {
     await new Promise((res) => app.listen(PORT, () => res(true)));
