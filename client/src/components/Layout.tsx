@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux';
 import { NavBar } from './NavBar';
 import { useState } from 'react';
 import { Sidebar } from './Sidebar';
+import { GlobalSharedState } from '../store/state/global';
+import { useGetUserQuery } from '../store/api';
+import { StoreState } from '../store';
 
 interface SideBarMenuBase {
   sideBarOpen: boolean;
@@ -17,7 +20,9 @@ interface ResolutionMode {
 const Layout = () => {
   const isNonMobileDevice = useMediaQuery('(min-width: 600px)');
   const [menuOpen, setMenuMode] = useState(true);
-
+  const userId = useSelector((state: StoreState) => state.global.user);
+  const { data } = useGetUserQuery(userId!);
+  console.log(data);
   return (
     <Box
       display={isNonMobileDevice ? 'flex' : 'block'}

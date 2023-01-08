@@ -29,12 +29,15 @@ import {
   PieChartOutline,
 } from '@mui/icons-material';
 
-import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { ResolutionMode, SideBarMenuBase } from './Layout';
 import { FlexBetween } from './FlexBetween';
 import { type ThemeStyle } from '../theme';
 import { pathMatch } from '../util';
+import { useSelector } from 'react-redux';
+import { StoreState } from '../store';
+import { useGetUserQuery } from '../store/api';
+import profileImage from '../assets/profile.jpeg';
 
 const navItems = [
   { text: 'Dashboard', icon: <HomeOutlined /> },
@@ -66,6 +69,8 @@ const Sidebar = ({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme<ThemeStyle>();
+  const userId = useSelector((state: StoreState) => state.global.user);
+  const { data } = useGetUserQuery(userId!);
   return (
     <Box component="nav">
       {sideBarOpen && (
@@ -151,6 +156,48 @@ const Sidebar = ({
               })}
             </List>
           </Box>
+          {data && (
+            <Box paddingBottom="2rem">
+              <Divider />
+              <FlexBetween
+                textTransform="none"
+                gap="1rem"
+                m="1.5rem 2rem 0 3rem"
+                style={{ justifyContent: 'normal' }}
+              >
+                <Box
+                  component="img"
+                  alt="profile image"
+                  src={profileImage}
+                  height="40px"
+                  width="40px"
+                  borderRadius="50%"
+                  sx={{ objectFit: 'cover' }}
+                ></Box>
+                <Box textAlign="left">
+                  <Typography
+                    fontWeight="bold"
+                    fontSize="0.9rem"
+                    sx={{ color: theme.palette.secondary[100] }}
+                  >
+                    {data.data.name}
+                  </Typography>
+                  <Typography
+                    fontSize="0.8rem"
+                    sx={{ color: theme.palette.secondary[200] }}
+                  >
+                    {data.data.occupation}
+                  </Typography>
+                </Box>
+                <SettingsOutlined
+                  sx={{
+                    color: theme.palette.secondary[300],
+                    fontSize: '25px',
+                  }}
+                />
+              </FlexBetween>
+            </Box>
+          )}
         </Drawer>
       )}
     </Box>
