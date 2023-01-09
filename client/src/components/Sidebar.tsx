@@ -34,9 +34,8 @@ import type { ResolutionMode, SideBarMenuBase } from './Layout';
 import { FlexBetween } from './FlexBetween';
 import { type ThemeStyle } from '../theme';
 import { pathMatch } from '../util';
-import { useSelector } from 'react-redux';
-import { StoreState } from '../store';
-import { useGetUserQuery } from '../store/api';
+import { StoreState, useAppSelector } from '../store';
+import { useGetUserQuery } from '../store/api/userApi';
 import profileImage from '../assets/profile.jpeg';
 
 const navItems = [
@@ -69,7 +68,7 @@ const Sidebar = ({
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const theme = useTheme<ThemeStyle>();
-  const userId = useSelector((state: StoreState) => state.global.user);
+  const userId = useAppSelector((state) => state.global.user);
   const { data } = useGetUserQuery(userId!);
   return (
     <Box component="nav">

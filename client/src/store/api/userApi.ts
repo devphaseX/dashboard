@@ -1,9 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import { baseUrl } from './shared';
 
 const api = createApi({
-  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BACKEND_URL }),
-  tagTypes: ['User'],
-  reducerPath: 'adminApi',
+  baseQuery: baseUrl,
+  tagTypes: ['User', 'Products'],
+  reducerPath: 'adminUserApi',
   endpoints(build) {
     return {
       getUser: build.query({
@@ -14,5 +15,5 @@ const api = createApi({
   },
 });
 
-export { api };
+export { api as userApi };
 export const { useGetUserQuery } = api;

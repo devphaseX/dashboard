@@ -20,13 +20,13 @@ import {
   Menu,
   MenuItem,
 } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FlexBetween } from './FlexBetween';
 import type { ThemeStyle } from '../theme';
 import { setMode } from '../store/state/global';
 import type { SideBarMenuBase } from './Layout';
-import { StoreState } from '../store';
-import { useGetUserQuery } from '../store/api';
+import { StoreState, useAppSelector } from '../store';
+import { useGetUserQuery } from '../store/api/userApi';
 import profileImage from '../assets/profile.jpeg';
 import { useState } from 'react';
 
@@ -35,7 +35,7 @@ interface NavBarProps extends SideBarMenuBase {}
 const NavBar = ({ setSideBarMode, sideBarOpen }: NavBarProps) => {
   const theme = useTheme<ThemeStyle>();
   const dispatch = useDispatch();
-  const userId = useSelector((state: StoreState) => state.global.user);
+  const userId = useAppSelector((state) => state.global.user);
   const { data } = useGetUserQuery(userId!);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const dropDownMenuOpened = !!anchorEl;
