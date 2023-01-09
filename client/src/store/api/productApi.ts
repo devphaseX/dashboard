@@ -12,8 +12,8 @@ const api = createApi({
   reducerPath: 'adminProductApi',
   endpoints(build) {
     return {
-      getProducts: build.query<Array<ProductData>, void>({
-        query: () => '/client/products',
+      getProducts: build.query({
+        query: (_arg: void) => '/client/products',
         providesTags: ['Products'],
         transformResponse: extractData<Array<ProductData>>,
       }),

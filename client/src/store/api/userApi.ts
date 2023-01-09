@@ -45,8 +45,8 @@ const api = createApi({
         transformResponse: extractData<UserClientData | null>,
       }),
 
-      getCustomers: build.query<Array<UserClientData>, void>({
-        query: () => 'client/customers',
+      getCustomers: build.query({
+        query: (_arg: void) => 'client/customers',
         providesTags: ['Customers'],
         transformResponse: extractData<Array<UserClientData>>,
       }),

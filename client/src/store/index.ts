@@ -4,16 +4,22 @@ import { userApi } from './api/userApi';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import { productApi } from './api/productApi';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { transactionApi } from './api/transaction';
 
 const store = configureStore({
   reducer: {
     global: globalStateReducer,
     [userApi.reducerPath]: userApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
+    [transactionApi.reducerPath]: transactionApi.reducer,
   },
   devTools: !!import.meta.env.DEV,
   middleware: (getDefaults) =>
-    getDefaults().concat(userApi.middleware, productApi.middleware),
+    getDefaults().concat(
+      userApi.middleware,
+      productApi.middleware,
+      transactionApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);
