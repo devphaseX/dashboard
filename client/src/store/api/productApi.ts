@@ -3,6 +3,7 @@ import {
   FetchResponseFailBase,
   FetchResponsePassBase,
   baseUrl,
+  extractData,
 } from './shared';
 
 const api = createApi({
@@ -14,7 +15,7 @@ const api = createApi({
       getProducts: build.query<Array<ProductData>, void>({
         query: () => '/client/products',
         providesTags: ['Products'],
-        transformResponse: (result: ProductQueryResponsePass) => result.data,
+        transformResponse: extractData<Array<ProductData>>,
       }),
     };
   },

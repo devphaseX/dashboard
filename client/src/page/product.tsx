@@ -6,13 +6,12 @@ import {
   Typography,
   Collapse,
   Button,
-  useTheme,
   useMediaQuery,
   Rating,
 } from '@mui/material';
 import { Header } from '../components/Header';
 import { type ProductData, useGetProductsQuery } from '../store/api/productApi';
-import { ThemeStyle } from '../theme';
+import { useThemeStyle } from '../theme';
 import { useState } from 'react';
 
 interface ProductProps extends ProductData {}
@@ -26,7 +25,7 @@ const Product = ({
   supply,
   stat,
 }: ProductProps) => {
-  const theme = useTheme<ThemeStyle>();
+  const theme = useThemeStyle();
   const [isExpanded, setExpandedMode] = useState(false);
   const { yealySalesTotal, yearlyTotalSoldUnits } = stat;
   return (

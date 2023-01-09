@@ -1,5 +1,6 @@
 import { ProductStat } from '../model/ProductStat';
 import { Product } from '../model/Product';
+import { User } from '../model/User';
 import { RequestHandler } from 'express';
 
 interface GetProductsRequestHandler extends RequestHandler {}
@@ -23,4 +24,18 @@ const getProducts: GetProductsRequestHandler = async (_, res) => {
   }
 };
 
-export { getProducts };
+interface GetCustomersRequestHandler extends RequestHandler {}
+
+const getCustomers: GetCustomersRequestHandler = async (_, res) => {
+  try {
+    const customers = await User.find({ role: 'user' }).select('-password');
+    res.status(200).json({ status: 'success', data: customers });
+  } catch (e) {
+    res.status(404).json({
+      status: 'failed',
+      error: { message: (e as { message?: string }).message ?? e },
+    });
+  }
+};
+
+export { getProducts, getCustomers };

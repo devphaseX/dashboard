@@ -1,4 +1,4 @@
-import { Theme } from '@mui/material';
+import { Theme, useTheme } from '@mui/material';
 
 // color design tokens export
 export const tokensDark = {
@@ -140,4 +140,7 @@ export const themeSettings = (mode: 'light' | 'dark') => {
 
 type ThemeStyle = ReturnType<typeof themeSettings> & Theme;
 
+const useThemeStyle = useTheme<ThemeStyle>;
+
+export { useThemeStyle };
 export type { ThemeStyle };
