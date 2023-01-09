@@ -3,6 +3,7 @@ import { Box } from '@mui/material';
 import { DataGrid, GridColumns } from '@mui/x-data-grid';
 import { Header } from '../components/Header';
 import { useMemo } from 'react';
+import { useThemeStyle } from '../theme';
 
 const Customer = () => {
   const tableHeaderInfos = useMemo<GridColumns>(
@@ -28,16 +29,50 @@ const Customer = () => {
   );
 
   const { data, isLoading } = useGetCustomersQuery();
+  const theme = useThemeStyle();
 
   return (
     <Box m="1.5rem 2.5rem">
-      <Header title="Customers" subTitle="" />
-      <DataGrid
-        columns={tableHeaderInfos}
-        rows={data ?? []}
-        getRowId={({ _id: userId }) => userId}
-        loading={isLoading || !data}
-      />
+      <Header title="Customers" subTitle="List of Customers" />
+      <Box
+        height="75vh"
+        mt="40px"
+        sx={{
+          '& .MuiDataGrid-root': {
+            border: 'none',
+          },
+
+          '& .MuiDataGrid-cell': {
+            borderBottom: 'none',
+          },
+
+          '& .MuiDataGrid-columnHeaders': {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderBottom: 'none',
+          },
+
+          '& .MuiDataGrid-virtualScroller': {
+            backgroundColor: theme.palette.primary.light,
+          },
+          '& .MuiDataGrid-footerContainer': {
+            backgroundColor: theme.palette.background.alt,
+            color: theme.palette.secondary[100],
+            borderTop: 'none',
+          },
+
+          '& .MuiDataGrid-toolbarContainer . MuiButton-text': {
+            color: `${theme.palette.secondary[200]} !important`,
+          },
+        }}
+      >
+        <DataGrid
+          columns={tableHeaderInfos}
+          rows={data ?? []}
+          getRowId={({ _id: userId }) => userId}
+          loading={isLoading || !data}
+        />
+      </Box>
     </Box>
   );
 };

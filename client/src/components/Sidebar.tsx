@@ -9,7 +9,6 @@ import {
   ListItemIcon,
   ListItemText,
   Typography,
-  useTheme,
 } from '@mui/material';
 
 import {
@@ -32,9 +31,9 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { ResolutionMode, SideBarMenuBase } from './Layout';
 import { FlexBetween } from './FlexBetween';
-import { type ThemeStyle } from '../theme';
+import { useThemeStyle } from '../theme';
 import { pathMatch } from '../util';
-import { StoreState, useAppSelector } from '../store';
+import { useAppSelector } from '../store';
 import { useGetUserQuery } from '../store/api/userApi';
 import profileImage from '../assets/profile.jpeg';
 
@@ -67,7 +66,7 @@ const Sidebar = ({
 }: SidebarProps) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const theme = useTheme<ThemeStyle>();
+  const theme = useThemeStyle();
   const userId = useAppSelector((state) => state.global.user);
   const { data } = useGetUserQuery(userId!);
   return (
@@ -179,13 +178,13 @@ const Sidebar = ({
                     fontSize="0.9rem"
                     sx={{ color: theme.palette.secondary[100] }}
                   >
-                    {data.data.name}
+                    {data.name}
                   </Typography>
                   <Typography
                     fontSize="0.8rem"
                     sx={{ color: theme.palette.secondary[200] }}
                   >
-                    {data.data.occupation}
+                    {data.occupation}
                   </Typography>
                 </Box>
                 <SettingsOutlined

@@ -12,7 +12,6 @@ import {
   AppBar,
   IconButton,
   Toolbar,
-  useTheme,
   InputBase,
   Button,
   Typography,
@@ -22,10 +21,10 @@ import {
 } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { FlexBetween } from './FlexBetween';
-import type { ThemeStyle } from '../theme';
+import { useThemeStyle } from '../theme';
 import { setMode } from '../store/state/global';
 import type { SideBarMenuBase } from './Layout';
-import { StoreState, useAppSelector } from '../store';
+import { useAppSelector } from '../store';
 import { useGetUserQuery } from '../store/api/userApi';
 import profileImage from '../assets/profile.jpeg';
 import { useState } from 'react';
@@ -33,7 +32,7 @@ import { useState } from 'react';
 interface NavBarProps extends SideBarMenuBase {}
 
 const NavBar = ({ setSideBarMode, sideBarOpen }: NavBarProps) => {
-  const theme = useTheme<ThemeStyle>();
+  const theme = useThemeStyle();
   const dispatch = useDispatch();
   const userId = useAppSelector((state) => state.global.user);
   const { data } = useGetUserQuery(userId!);
@@ -103,13 +102,13 @@ const NavBar = ({ setSideBarMode, sideBarOpen }: NavBarProps) => {
                       fontSize="0.85rem"
                       sx={{ color: theme.palette.secondary[100] }}
                     >
-                      {data.data.name}
+                      {data.name}
                     </Typography>
                     <Typography
                       fontSize="0.75rem"
                       sx={{ color: theme.palette.secondary[200] }}
                     >
-                      {data.data.occupation}
+                      {data.occupation}
                     </Typography>
                   </Box>
                   <ArrowDropDownOutlined

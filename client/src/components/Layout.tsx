@@ -20,7 +20,6 @@ const Layout = () => {
   const [menuOpen, setMenuMode] = useState(true);
   const userId = useAppSelector((state) => state.global.user);
   const { data } = useGetUserQuery(userId!);
-  console.log(data);
   return (
     <Box
       display={isNonMobileDevice ? 'flex' : 'block'}

@@ -1,13 +1,12 @@
-import React from 'react';
-import { Typography, Box, useTheme } from '@mui/material';
-import type { ThemeStyle } from '../theme';
+import { Typography, Box } from '@mui/material';
+import { useThemeStyle } from '../theme';
 interface HeaderProps {
   title: string;
   subTitle: string;
 }
 
 const Header = ({ subTitle, title }: HeaderProps) => {
-  const theme = useTheme<ThemeStyle>();
+  const theme = useThemeStyle();
   return (
     <Box>
       <Typography
