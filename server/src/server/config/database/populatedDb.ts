@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { Product } from '../../../model/Product';
 import { ProductStat } from '../../../model/ProductStat';
 import { getEnvVariable } from '../env';
+import { ModelData } from '../../../model/';
 
 const populateDb = async <Model extends mongoose.Model<any>>(
   Model: Model,
@@ -47,7 +48,3 @@ startDbServer()
   .finally(() => {
     process.exit(0);
   });
-
-type ModelData<DataModel> = DataModel extends mongoose.Model<infer DataSchema>
-  ? { [Propert in keyof DataSchema]?: any }
-  : never;
