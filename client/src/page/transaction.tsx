@@ -1,4 +1,3 @@
-import React from 'react';
 import { Box } from '@mui/material';
 import { DataGrid, GridColumns } from '@mui/x-data-grid';
 import {
@@ -52,8 +51,8 @@ const Transaction = () => {
   const { data, isLoading } = useGetTransactionQuery(query);
   const tableHeaderInfos = useMemo<GridColumns>(
     () => [
-      { field: '_id', headerClassName: 'ID', flex: 1 },
-      { field: 'userId', headerName: 'User ID', flex: 1 },
+      { field: '_id', headerName: 'ID', flex: 1, sortable: false },
+      { field: 'userId', headerName: 'User ID', flex: 1, sortable: false },
       { field: 'createdAt', headerName: 'Created At', flex: 1 },
       {
         field: 'products',
@@ -117,17 +116,18 @@ const Transaction = () => {
           pageSize={pageSize}
           paginationMode="server"
           sortingMode="server"
-          rowsPerPageOptions={[pageSize]}
+          rowsPerPageOptions={[20, 50, 100]}
           onPageChange={(newPage) => setPage(newPage)}
           onPageSizeChange={(pageSize) => setPageSize(pageSize)}
-          onSortModelChange={([sortModel]) => {
-            console.log(sortModel);
+          onSortModelChange={([sortModel]) =>
             setSortObject({
               field: sortModel.field as any,
               method: sortModel.sort as any,
-            });
+            })
+          }
+          components={{
+            Toolbar: () => <CustomGridToolbar submit={setSearch} />,
           }}
-          components={{ Toolbar: CustomGridToolbar }}
         />
       </Box>
     </Box>

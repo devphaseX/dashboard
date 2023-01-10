@@ -74,6 +74,7 @@ const getTransactions: GetTransactionRequestHandler = async (req, res) => {
   try {
     const { page = 1, pageSize = 20, sort = null, search = '' } = req.query;
     const formattedSortObject = parseSortField(sort);
+    console.log({ search });
 
     const transactions = await Transaction.find({
       $or: [
