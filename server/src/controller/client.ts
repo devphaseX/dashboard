@@ -1,9 +1,12 @@
+//@ts-ignore
+import getCountryIso3 from 'country-iso-2-to-3';
 import { ProductStat } from '../model/ProductStat';
 import { Product } from '../model/Product';
 import { User } from '../model/User';
 import { Transaction } from '../model/Transaction';
 import { RequestHandler } from 'express';
 import { GetModelDataKey } from '../model';
+import { count } from 'console';
 
 interface GetProductsRequestHandler extends RequestHandler {}
 
@@ -106,4 +109,46 @@ const getTransactions: GetTransactionRequestHandler = async (req, res) => {
   }
 };
 
-export { getProducts, getCustomers, getTransactions };
+type CountryTrafficData = Map<string, number>;
+
+interface CountryIsoMutator {
+  (getIso3Form: (iso2: string) => string): void;
+}
+const convertCountryIso2to3 = (mutator: CountryIsoMutator) => {
+  const iso3Map: CountryTrafficData = new Map();
+
+  const getIso3Form: Parameters<CountryIsoMutator>[0] = (iso2) => {
+    const iso3 = iso2.length <= 2 ? getCountryIso3(iso2) : iso2;
+    const iso3Count = (iso3Map.get(iso3) ?? 0) + 1;
+    iso3Map.set(iso3, iso3Count);
+    return iso3;
+  };
+
+  mutator(getIso3Form);
+  return iso3Map;
+};
+
+interface GetUserGeographyRequestHandler extends RequestHandler {}
+const getUserGeograhpy: GetUserGeographyRequestHandler = async (_, res) => {
+  try {
+    const users = await User.find();
+
+    const countryIso3 = Array.from(
+      convertCountryIso2to3((iso2to3) => {
+        users.forEach(({ country }) => {
+          if (country) iso2to3(country);
+        });
+      }).entries(),
+      ([key, value]) => ({ id: key, value })
+    );
+
+    return res.status(200).json({ status: 'success', data: countryIso3 });
+  } catch (e) {
+    res.status(404).json({
+      status: 'failed',
+      error: { message: (e as { message?: string }).message ?? e },
+    });
+  }
+};
+
+export { getProducts, getCustomers, getTransactions, getUserGeograhpy };
