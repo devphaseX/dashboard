@@ -1,10 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import {
-  FetchResponseFailBase,
-  FetchResponsePassBase,
-  baseUrl,
-  extractData,
-} from './shared';
+import { baseUrl, extractData } from './shared';
 
 interface TransactionData {
   createdAt: any;
@@ -33,17 +28,6 @@ type TransactionQueryData = {
   transactions: Array<TransactionData>;
   count: number;
 };
-interface GetTransactionQueryPassResponse extends FetchResponsePassBase {
-  data: TransactionQueryData;
-}
-
-interface GetTransactionQueryFailResponse extends FetchResponseFailBase {
-  error: { message?: string };
-}
-
-type GetTransactionQueryResponse =
-  | GetTransactionQueryPassResponse
-  | GetTransactionQueryFailResponse;
 
 const api = createApi({
   baseQuery: baseUrl,
@@ -73,7 +57,6 @@ export { api as transactionApi };
 
 export const { useGetTransactionQuery } = api;
 export type {
-  GetTransactionQueryResponse,
   TransactionSortObject,
   TransactionSortField,
   TransactionRequestQuery,

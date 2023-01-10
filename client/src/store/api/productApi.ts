@@ -1,10 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import {
-  FetchResponseFailBase,
-  FetchResponsePassBase,
-  baseUrl,
-  extractData,
-} from './shared';
+import { baseUrl, extractData } from './shared';
 
 const api = createApi({
   baseQuery: baseUrl,
@@ -51,23 +46,7 @@ interface ProductStatData {
   };
 }
 
-interface ProductQueryResponsePass extends FetchResponsePassBase {
-  data: Array<ProductData>;
-}
-
-interface ProductQueryResponseReject extends FetchResponseFailBase {
-  error: { message: unknown };
-}
-
-type ProductQueryResponse =
-  | ProductQueryResponsePass
-  | ProductQueryResponseReject;
-
 export { api as productApi };
 export const { useGetProductsQuery } = api;
 
-export type {
-  ProductData,
-  ProductStatData,
-  ProductQueryResponse as ProductQueryResult,
-};
+export type { ProductData, ProductStatData };

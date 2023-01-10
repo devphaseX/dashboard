@@ -1,10 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import {
-  FetchResponseFailBase,
-  FetchResponsePassBase,
-  baseUrl,
-  extractData,
-} from './shared';
+import { baseUrl, extractData } from './shared';
 
 interface UserClientData {
   _id: string;
@@ -21,34 +16,22 @@ interface UserClientData {
   updatedAt: string | Date;
 }
 
-interface GetCustomersResponsePass extends FetchResponsePassBase {
-  data: Array<UserClientData>;
-}
-
-interface GetCustomersResponseReject extends FetchResponseFailBase {
-  error: { message: unknown };
-}
-
-type GetCustomersResponse =
-  | GetCustomersResponsePass
-  | GetCustomersResponseReject;
-
 const api = createApi({
   baseQuery: baseUrl,
   tagTypes: ['User', 'Customers'],
   reducerPath: 'adminUserApi',
   endpoints(build) {
     return {
-      getUser: build.query({
+      getUser: build.query<UserClientData | null, string>({
         query: (id: string) => `/general/user/${id}`,
         providesTags: ['User'],
-        transformResponse: extractData<UserClientData | null>,
+        transformResponse: extractData,
       }),
 
-      getCustomers: build.query({
+      getCustomers: build.query<Array<UserClientData>, void>({
         query: (_arg: void) => 'client/customers',
         providesTags: ['Customers'],
-        transformResponse: extractData<Array<UserClientData>>,
+        transformResponse: extractData,
       }),
     };
   },
@@ -56,4 +39,4 @@ const api = createApi({
 
 export { api as userApi };
 export const { useGetUserQuery, useGetCustomersQuery } = api;
-export type { GetCustomersResponse, UserClientData };
+export type { UserClientData };
