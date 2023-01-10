@@ -5,6 +5,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 import { productApi } from './api/productApi';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { transactionApi } from './api/transaction';
+import { geographyApi } from './api/geography';
 
 const store = configureStore({
   reducer: {
@@ -12,13 +13,15 @@ const store = configureStore({
     [userApi.reducerPath]: userApi.reducer,
     [productApi.reducerPath]: productApi.reducer,
     [transactionApi.reducerPath]: transactionApi.reducer,
+    [geographyApi.reducerPath]: geographyApi.reducer,
   },
   devTools: !!import.meta.env.DEV,
   middleware: (getDefaults) =>
     getDefaults().concat(
       userApi.middleware,
       productApi.middleware,
-      transactionApi.middleware
+      transactionApi.middleware,
+      geographyApi.middleware
     ),
 });
 

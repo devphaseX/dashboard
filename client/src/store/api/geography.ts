@@ -21,4 +21,5 @@ const api = createApi({
   },
 });
 
-export { api };
+export { api as geographyApi };
+export const { useGetGeographyQuery } = api;
