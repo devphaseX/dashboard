@@ -3,8 +3,6 @@ import { Box, useMediaQuery } from '@mui/material';
 import { NavBar } from './NavBar';
 import { useState } from 'react';
 import { Sidebar } from './Sidebar';
-import { useGetUserQuery } from '../store/api/userApi';
-import { useAppSelector } from '../store';
 
 interface SideBarMenuBase {
   sideBarOpen: boolean;
@@ -18,12 +16,11 @@ interface ResolutionMode {
 const Layout = () => {
   const isNonMobileDevice = useMediaQuery('(min-width: 600px)');
   const [menuOpen, setMenuMode] = useState(true);
-  const userId = useAppSelector((state) => state.global.user);
-  const { data } = useGetUserQuery(userId!);
+
   return (
     <Box
       display={isNonMobileDevice ? 'flex' : 'block'}
-      width="100vw"
+      width="100%"
       height="100vh"
     >
       <Sidebar

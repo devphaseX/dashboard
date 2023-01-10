@@ -29,8 +29,12 @@ interface TransactionRequestQuery {
   search?: string;
 }
 
+type TransactionQueryData = {
+  transactions: Array<TransactionData>;
+  count: number;
+};
 interface GetTransactionQueryPassResponse extends FetchResponsePassBase {
-  data: Array<TransactionData>;
+  data: TransactionQueryData;
 }
 
 interface GetTransactionQueryFailResponse extends FetchResponseFailBase {
@@ -59,7 +63,7 @@ const api = createApi({
           params: { page, pageSize, search, sort },
         }),
         providesTags: ['Transactions'],
-        transformResponse: extractData<Array<TransactionData>>,
+        transformResponse: extractData<TransactionQueryData>,
       }),
     };
   },
@@ -68,4 +72,9 @@ const api = createApi({
 export { api as transactionApi };
 
 export const { useGetTransactionQuery } = api;
-export type { GetTransactionQueryResponse };
+export type {
+  GetTransactionQueryResponse,
+  TransactionSortObject,
+  TransactionSortField,
+  TransactionRequestQuery,
+};

@@ -38,6 +38,7 @@ const Customer = () => {
         height="75vh"
         mt="40px"
         sx={{
+          overflowX: 'hidden',
           '& .MuiDataGrid-root': {
             border: 'none',
           },
