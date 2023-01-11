@@ -170,7 +170,7 @@ const OverviewChart = ({ view, isDashboard }: OveriewChartProps) => {
             ]
           : undefined
       }
-    ></ResponsiveLine>
+    />
   );
 };
 

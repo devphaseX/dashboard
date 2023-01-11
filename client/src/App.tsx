@@ -17,6 +17,7 @@ import {
   Transaction,
   Geography,
   Overview,
+  DailyStat,
 } from './page';
 
 const router = createBrowserRouter([
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: '/transactions', element: <Transaction /> },
       { path: '/geography', element: <Geography /> },
       { path: '/overview', element: <Overview /> },
+      { path: '/daily', element: <DailyStat /> },
     ],
   },
 ]);
