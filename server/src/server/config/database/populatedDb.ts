@@ -1,4 +1,5 @@
 import {
+  dataOverallStat,
   dataProduct,
   dataProductStat,
   dataTransaction,
@@ -12,6 +13,7 @@ import { ProductStat } from '../../../model/ProductStat';
 import { getEnvVariable } from '../env';
 import { ModelData } from '../../../model/';
 import { Transaction } from '../../../model/Transaction';
+import { OverAllStat } from '../../../model/OverAllStat';
 
 const populateDb = async <Model extends mongoose.Model<any>>(
   Model: Model,
@@ -28,6 +30,9 @@ const populateProductStatCollection = () =>
 
 const populateTransactionCollection = () =>
   populateDb(Transaction, dataTransaction);
+
+const populateOverAllStatCollection = () =>
+  populateDb(OverAllStat, dataOverallStat);
 
 startDbServer()
   .then(async () => {
@@ -52,11 +57,16 @@ startDbServer()
       console.log('Transaction records database population done.')
     );
 
+    const overAllStatPopulateTask = populateOverAllStatCollection().then(() =>
+      console.log('OverAllStat records database population done.')
+    );
+
     return Promise.all([
       userPopulateTask,
       productPopulateTask,
       productStatPopulateTask,
       transactionPopulateTask,
+      overAllStatPopulateTask,
     ]);
   })
   .finally(() => {
