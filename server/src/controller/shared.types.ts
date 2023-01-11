@@ -9,13 +9,13 @@ interface ResponseSuccess<T> extends ResponseBase {
   data: T;
 }
 
-interface ResponseFailure<T> extends ResponseBase {
+interface ResponseFailure<Cause = unknown> extends ResponseBase {
   status: 'failed';
-  error: unknown;
+  error: PlainErrorWithCause<Cause>;
 }
 
 type PlainErrorWithCause<ErrorCause> = {
-  message?: string;
+  message?: unknown;
   cause?: ErrorCause;
 };
 

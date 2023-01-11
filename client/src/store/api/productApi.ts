@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseUrl, extractData } from './shared';
+import { DailyData, MonthlyData, baseUrl, extractData } from './shared';
 
 const api = createApi({
   baseQuery: baseUrl,
@@ -30,20 +30,12 @@ interface ProductData {
 }
 
 interface ProductStatData {
-  monthlyData: {
-    month: string;
-    totalSales: number;
-    totalUnits: number;
-  }[];
+  monthlyData: MonthlyData[];
   productId: string;
   yealySalesTotal: number;
   yearlyTotalSoldUnits: number;
   year: number;
-  dailyData: {
-    day: string;
-    totalSales: number;
-    totalUnits: number;
-  };
+  dailyData: DailyData;
 }
 
 export { api as productApi };

@@ -1,11 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseUrl, extractData } from './shared';
+import { TransactionData } from './transaction';
 
 interface UserClientData {
   _id: string;
   name: string;
   email: string;
-  transactions: any[];
+  transactions: TransactionData[];
   role: string;
   city: string;
   state: string;

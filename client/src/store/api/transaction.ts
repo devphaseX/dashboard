@@ -60,4 +60,5 @@ export type {
   TransactionSortObject,
   TransactionSortField,
   TransactionRequestQuery,
+  TransactionData,
 };

@@ -18,7 +18,25 @@ interface FetchResponseFailBase {
   error: unknown;
 }
 
+interface MonthlyData {
+  month: string;
+  totalSales: number;
+  totalUnits: number;
+}
+
+interface DailyData {
+  day: string;
+  totalSales: number;
+  totalUnits: number;
+}
+
 type FetchResponseBase = FetchResponsePassBase | FetchResponseFailBase;
 export { baseUrl, extractData };
 
-export type { FetchResponseBase, FetchResponseFailBase, FetchResponsePassBase };
+export type {
+  FetchResponseBase,
+  FetchResponseFailBase,
+  FetchResponsePassBase,
+  MonthlyData,
+  DailyData,
+};
