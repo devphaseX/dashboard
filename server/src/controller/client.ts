@@ -6,7 +6,6 @@ import { User } from '../model/User';
 import { Transaction } from '../model/Transaction';
 import { RequestHandler } from 'express';
 import { GetModelDataKey } from '../model';
-import { count } from 'console';
 
 interface GetProductsRequestHandler extends RequestHandler {}
 
