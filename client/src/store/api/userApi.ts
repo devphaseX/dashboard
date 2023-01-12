@@ -19,7 +19,7 @@ interface UserClientData {
 
 const api = createApi({
   baseQuery: baseUrl,
-  tagTypes: ['User', 'Customers'],
+  tagTypes: ['User', 'Customers', 'Admin'],
   reducerPath: 'adminUserApi',
   endpoints(build) {
     return {
@@ -34,10 +34,16 @@ const api = createApi({
         providesTags: ['Customers'],
         transformResponse: extractData<Array<UserClientData>>,
       }),
+
+      getAdmins: build.query({
+        query: (_arg: void) => '/management/admin',
+        providesTags: ['Admin'],
+        transformResponse: extractData<Array<UserClientData>>,
+      }),
     };
   },
 });
 
 export { api as userApi };
-export const { useGetUserQuery, useGetCustomersQuery } = api;
+export const { useGetUserQuery, useGetCustomersQuery, useGetAdminsQuery } = api;
 export type { UserClientData };
