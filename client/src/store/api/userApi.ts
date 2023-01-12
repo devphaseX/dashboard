@@ -7,7 +7,7 @@ interface UserClientData {
   name: string;
   email: string;
   transactions: TransactionData[];
-  role: string;
+  role: 'user' | 'admin' | 'superAdmin';
   city: string;
   state: string;
   country: string;
@@ -15,6 +15,10 @@ interface UserClientData {
   phoneNumber: string;
   createdAt: string | Date;
   updatedAt: string | Date;
+}
+
+interface AdminClientData extends UserClientData {
+  role: 'admin';
 }
 
 const api = createApi({
@@ -38,7 +42,7 @@ const api = createApi({
       getAdmins: build.query({
         query: (_arg: void) => '/management/admin',
         providesTags: ['Admin'],
-        transformResponse: extractData<Array<UserClientData>>,
+        transformResponse: extractData<Array<AdminClientData>>,
       }),
     };
   },

@@ -20,6 +20,7 @@ import {
   DailyStat,
   MonthlyStat,
   BreakDownStat,
+  AdminInfo,
 } from './page';
 
 const router = createBrowserRouter([
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: '/daily', element: <DailyStat /> },
       { path: '/monthly', element: <MonthlyStat /> },
       { path: '/breakdown', element: <BreakDownStat /> },
+      { path: '/admin', element: <AdminInfo /> },
     ],
   },
 ]);

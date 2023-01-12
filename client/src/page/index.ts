@@ -8,3 +8,4 @@ export * from './daily';
 export * from './montly';
 export * from './montly';
 export * from './breakdown';
+export * from './adminInfo';
