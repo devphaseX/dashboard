@@ -10,7 +10,14 @@ import {
 import type { StoreState } from './store/index';
 import { themeSettings } from './theme';
 import { Layout } from './components/Layout';
-import { Dashboard, Products, Customer, Transaction, Geography } from './page';
+import {
+  Dashboard,
+  Products,
+  Customer,
+  Transaction,
+  Geography,
+  Overview,
+} from './page';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +30,7 @@ const router = createBrowserRouter([
       { path: '/customers', element: <Customer /> },
       { path: '/transactions', element: <Transaction /> },
       { path: '/geography', element: <Geography /> },
+      { path: '/overview', element: <Overview /> },
     ],
   },
 ]);

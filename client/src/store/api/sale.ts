@@ -9,7 +9,7 @@ import {
 interface SalesQueryResult {
   createdAt: string | Date;
   updatedAt: string | Date;
-  monthlyData: MonthlyData;
+  monthlyData: Array<MonthlyData>;
   totalCustomers: number;
   yealySalesTotal: number;
   yearlyTotalSoldUnits: number;
@@ -24,7 +24,7 @@ const salesApi = createApi({
   reducerPath: 'adminSaleApi',
   endpoints: (build) => ({
     getSale: build.query({
-      query: (_arg: void) => `/sales`,
+      query: (_arg: void) => `/sales/sales`,
       providesTags: ['Sales'],
       transformResponse: extractData<SalesQueryResult>,
     }),

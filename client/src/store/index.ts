@@ -6,6 +6,7 @@ import { productApi } from './api/productApi';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
 import { transactionApi } from './api/transaction';
 import { geographyApi } from './api/geography';
+import { salesApi } from './api/sale';
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     [productApi.reducerPath]: productApi.reducer,
     [transactionApi.reducerPath]: transactionApi.reducer,
     [geographyApi.reducerPath]: geographyApi.reducer,
+    [salesApi.reducerPath]: salesApi.reducer,
   },
   devTools: !!import.meta.env.DEV,
   middleware: (getDefaults) =>
@@ -21,7 +23,8 @@ const store = configureStore({
       userApi.middleware,
       productApi.middleware,
       transactionApi.middleware,
-      geographyApi.middleware
+      geographyApi.middleware,
+      salesApi.middleware
     ),
 });
 

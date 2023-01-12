@@ -133,7 +133,6 @@ const getUserGeograhpy: GetUserGeographyRequestHandler = async (_, res) => {
   try {
     const users = await User.find();
 
-    console.log(users?.length);
     const countryIso3 = Array.from(
       convertCountryIso2to3((iso2to3) => {
         users.forEach(({ country }) => {

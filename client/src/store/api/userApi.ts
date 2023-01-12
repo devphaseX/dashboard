@@ -23,16 +23,16 @@ const api = createApi({
   reducerPath: 'adminUserApi',
   endpoints(build) {
     return {
-      getUser: build.query<UserClientData | null, string>({
+      getUser: build.query({
         query: (id: string) => `/general/user/${id}`,
         providesTags: ['User'],
-        transformResponse: extractData,
+        transformResponse: extractData<UserClientData | null>,
       }),
 
-      getCustomers: build.query<Array<UserClientData>, void>({
+      getCustomers: build.query({
         query: (_arg: void) => 'client/customers',
         providesTags: ['Customers'],
-        transformResponse: extractData,
+        transformResponse: extractData<Array<UserClientData>>,
       }),
     };
   },
