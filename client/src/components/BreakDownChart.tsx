@@ -28,16 +28,14 @@ const BreakDownChart = ({ isDashboard }: BreakDownChartProps) => {
     theme.palette.secondary[500],
   ];
 
-  const graphData = useMemo(() => {
-    return Object.entries(data.salesByCategory).map<ChartPie>(
-      ([category, sales], i) => ({
-        id: category,
-        label: category,
-        value: sales,
-        color: colors[i % colors.length],
-      })
-    );
-  }, [data]);
+  const graphData = Object.entries(data.salesByCategory).map<ChartPie>(
+    ([category, sales], i) => ({
+      id: category,
+      label: category,
+      value: sales,
+      color: colors[i % colors.length],
+    })
+  );
 
   return (
     <Box

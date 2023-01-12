@@ -8,7 +8,7 @@ const BreakDownStat = () => {
     <Box m="1.5rem 2.5rem">
       <Header title="BREAKDOWN" subTitle="Breakdown of Sales By Category" />
       <Box mt="40px" height="75vh">
-        <BreakDownChart isDashboard />
+        <BreakDownChart isDashboard={false} />
       </Box>
     </Box>
   );
