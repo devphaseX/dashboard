@@ -15,7 +15,7 @@ interface SalesQueryResult {
   yearlyTotalSoldUnits: number;
   year: number;
   dailyData: Array<DailyData>;
-  salesByCategory: any;
+  salesByCategory: { [category: string]: number };
 }
 
 const salesApi = createApi({
