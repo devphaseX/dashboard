@@ -18,12 +18,11 @@ const DailyStat = () => {
   const theme = useThemeStyle();
   const [startDate, setStartDate] = useState(new Date('2021-03-01'));
   const [endDate, setEndDate] = useState(() => {
-    const date = new Date();
+    const date = new Date(startDate);
     date.setMonth(startDate.getMonth() + 1);
     return date;
   });
   const { data } = useGetSaleQuery();
-  const isDashboard = false;
 
   const graphData = useMemo(() => {
     const totalSalesLine: TotalSalesLine = {
@@ -55,7 +54,16 @@ const DailyStat = () => {
     <Box m="1.5rem 2.5rem">
       <Header title="DAILY SALES" subTitle="Chart of daily sales" />
       <Box height="70vh">
-        <Box display="flex" justifyContent="flex-end">
+        <Box
+          display="flex"
+          justifyContent="flex-end"
+          width="100%"
+          sx={{
+            '& > *': {
+              width: 'min-content',
+            },
+          }}
+        >
           <DatePicker
             selected={startDate}
             onChange={(date: Date) => {
@@ -123,15 +131,9 @@ const DailyStat = () => {
             }}
             yFormat=" >-.2f"
             curve="catmullRom"
-            enableArea={isDashboard}
             axisTop={null}
             axisRight={null}
             axisBottom={{
-              format: (v: string) => {
-                if (isDashboard) return v.slice(0, 3);
-                return v;
-              },
-
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 90,
