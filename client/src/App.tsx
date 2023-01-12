@@ -18,6 +18,8 @@ import {
   Geography,
   Overview,
   DailyStat,
+  MonthlyStat,
+  BreakDownStat,
 } from './page';
 
 const router = createBrowserRouter([
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
       { path: '/geography', element: <Geography /> },
       { path: '/overview', element: <Overview /> },
       { path: '/daily', element: <DailyStat /> },
+      { path: '/monthly', element: <MonthlyStat /> },
+      { path: '/breakdown', element: <BreakDownStat /> },
     ],
   },
 ]);
