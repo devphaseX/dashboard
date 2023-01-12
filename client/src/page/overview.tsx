@@ -24,7 +24,7 @@ const Overview = () => {
             <MenuItem value="units">Units</MenuItem>
           </Select>
         </FormControl>
-        <OverviewChart view={view} isDashboard />
+        <OverviewChart view={view} isDashboard={false} />
       </Box>
     </Box>
   );

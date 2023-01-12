@@ -25,7 +25,7 @@ interface MonthlyData {
 }
 
 interface DailyData {
-  day: string;
+  date: string | Date;
   totalSales: number;
   totalUnits: number;
 }

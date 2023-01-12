@@ -52,7 +52,7 @@ const OverviewChart = ({ view, isDashboard }: OveriewChartProps) => {
     ({
       totalSaleGraphData: totalSalesLine.data,
       totalUnitGraphData: totalUnitsLine.data,
-    } = computeMonthlyAccount(data.monthlyData));
+    } = computeAccountRecord(data.monthlyData));
 
     return [[totalSalesLine], [totalUnitsLine]];
   }, [data]);
@@ -175,9 +175,16 @@ const OverviewChart = ({ view, isDashboard }: OveriewChartProps) => {
 };
 
 export { OverviewChart };
-export type { ChartType };
+export type {
+  ChartType,
+  GraphPointData,
+  TotalSalesLine,
+  TotalUnitsLine,
+  OverviewLine,
+  GraphLine,
+};
 
-const computeMonthlyAccount = (monthlyRecord: Array<MonthlyData>) => {
+const computeAccountRecord = (monthlyRecord: Array<MonthlyData>) => {
   const totalSaleGraphData: Array<GraphPointData> = [];
   const totalUnitGraphData: Array<GraphPointData> = [];
 

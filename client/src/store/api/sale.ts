@@ -14,7 +14,7 @@ interface SalesQueryResult {
   yealySalesTotal: number;
   yearlyTotalSoldUnits: number;
   year: number;
-  dailyData: DailyData;
+  dailyData: Array<DailyData>;
   salesByCategory: any;
 }
 
